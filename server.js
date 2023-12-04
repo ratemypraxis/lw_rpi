@@ -12,9 +12,12 @@ const io = socketIO(server);
 const ledPin = 18;
 const led = new Gpio(ledPin, 'out');
 
-//serve webpage 
+//serve local lib (u may ignore)
+app.use(express.static(path.join(__dirname, 'public')));
+
+//serve webpage
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 //a user has connected
