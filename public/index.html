@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+  <title>pi bell</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <button id="ringButton">ring</button>
+
+  <script>
+    const socket = io();
+    const ringButton = document.getElementById('ringButton');
+
+    socket.on('connect', () => {
+      console.log('reached server');
+    });
+
+    socket.on('disconnect', () => {
+      console.log('left server');
+    });
+
+    //send each ring to the server
+    ringButton.addEventListener('click', () => {
+      console.log('user rung');
+      socket.emit('ring');
+    });
+  </script>
+</body>
+</html>
